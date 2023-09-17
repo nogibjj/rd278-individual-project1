@@ -1,10 +1,9 @@
 """
 This module takes a CSV and returns statistics about it.
 """
-
+import os
 import matplotlib.pyplot as plt
 import polars as pl
-import os
 
 def is_int_or_float(value):
     """
