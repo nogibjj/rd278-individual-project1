@@ -1,31 +1,64 @@
 """
-This module takes a csv and returns statistics about it
+This module takes a CSV and returns statistics about it.
 """
+
 import matplotlib.pyplot as plt
 import polars as pl
 import os
 
 def is_int_or_float(value):
+    """
+    Check if a value is an integer or a float.
+
+    Parameters:
+        value: The value to check.
+
+    Returns:
+        bool: True if the value is an integer or float, False otherwise.
+    """
     return isinstance(value, (int, float))
 
 def test_float_int(vector):
-    # Use the apply method to check the data types
-    results = vector.apply(is_int_or_float)
+    """
+    Check if a Polars Series contains mostly integers or floats.
 
-    #Allowance of 90%
-    THRESHOLD=.9
+    Parameters:
+        vector: A Polars Series to check.
 
-    allowance=sum(results)/len(vector)>=THRESHOLD
+    Returns:
+        bool: True if the majority of values are integers or floats, False otherwise.
+    """
+    # Allowance of 90%
+    THRESHOLD = 0.9
+
+    allowance = sum(vector.apply(is_int_or_float)) / len(vector) >= THRESHOLD
 
     return allowance
-    
 
 def is_csv_file(file_path):
+    """
+    Check if a file has a '.csv' extension.
+
+    Parameters:
+        file_path: The path to the file.
+
+    Returns:
+        bool: True if the file has a '.csv' extension, False otherwise.
+    """
     # Extract the file extension from the file path
     file_extension = os.path.splitext(file_path)[-1].lower()
     return file_extension == ".csv"
 
 def is_png_file(file_path):
+    """
+    Check if a file has a '.png' extension.
+
+    Parameters:
+        file_path: The path to the file.
+
+    Returns:
+        bool: True if the file has a '.png' extension, False otherwise.
+    """
     # Extract the file extension from the file path
     file_extension = os.path.splitext(file_path)[-1].lower()
     return file_extension == ".png"
@@ -35,34 +68,32 @@ def descriptive_statistics(directory_path):
     Calculate descriptive statistics for a DataFrame.
 
     Parameters:
-    data (pl.DataFrame): The input Polars DataFrame,
-    which must contain numeric data.
+        directory_path (str): The path to the input CSV file.
 
     Returns:
-    pl.DataFrame: A DataFrame containing descriptive statistics.
+        Tuple[pl.DataFrame, pl.DataFrame]: A tuple containing the input Polars DataFrame and the statistics DataFrame.
     """
     if is_csv_file(directory_path):
-        data=pl.read_csv(directory_path)
-        results=data.describe()
+        data = pl.read_csv(directory_path)
+        results = data.describe()
         results.write_csv('results.csv')
 
-        return data,results
+        return data, results
     else:
-        raise  NotADirectoryError("This is not a valid .csv file")
-
+        raise NotADirectoryError("This is not a valid .csv file")
 
 def generating_plot(data, x_variable, y_variable, title, size=None):
     """
+    Generate a scatter plot.
+
     Parameters:
-        data: Polar DataFrame
-        x_variable: String of the variable in axis X from data
-        y_variable: String of the variable in axis Y from data
-        size: String if a variable is required to
-        title: String for the plot title
+        data (pl.DataFrame): The input Polars DataFrame.
+        x_variable (str): The variable on the X-axis.
+        y_variable (str): The variable on the Y-axis.
+        title (str): The title of the plot.
+        size (str, optional): A variable for marker size. Default is None.
     """
-
-    if test_float_int(data[x_variable]) and test_float_int(data[y_variable]) and (test_float_int(data[size]) or size is None):
-
+    if test_float_int(data[x_variable]) and test_float_int(data[y_variable]) and (size is None or test_float_int(data[size])):
         if size is None:
             area = 1
         else:
@@ -73,8 +104,11 @@ def generating_plot(data, x_variable, y_variable, title, size=None):
         plt.xlabel(x_variable)
         plt.ylabel(y_variable)
         plt.title(title)
-        plt.show()
         plt.savefig(title + ".png", dpi=300, bbox_inches="tight")
-
+        plt.show()
     else:
-        raise ValueError(f"It is possible that {x_variable}, {y_variable}, or {size} ar not float or int")
+        raise ValueError(f"One or more of {x_variable}, {y_variable}, or {size} is not a float or int")
+
+# Usage:
+# descriptive_statistics("data.csv")
+# generating_plot(data, "X_variable", "Y_variable", "My Plot", "Size_variable")
