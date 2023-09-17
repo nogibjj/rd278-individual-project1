@@ -24,9 +24,7 @@ Just for the sake of ilustration, a plot was added to see the relationship betwe
 
 ![Scatter Plot](https://github.com/nogibjj/rd278-w3-polars/blob/main/GDP%20per%20Capita%20vs%20Avg%20income%20(size%20proportional%20Population).png)
 
-In summary:
-
-## Requirements
+# Requirements
 The project structure must include the following files:
 -  Jupyter Notebook with:
 - [x] Cells that perform descriptive statistics using Polars or Panda.
