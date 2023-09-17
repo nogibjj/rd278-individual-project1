@@ -21,7 +21,7 @@ install:
 
 # Run unit tests
 test:
-	$(VENV)/bin/pytest $(TEST_DIR)
+	$(VENV)/bin/pytest $(TEST_DIR); $(VENV)/bin/py.test --nbval $(SRC_DIR)/Notebook.ipynb
 
 # Format code with Black
 format:

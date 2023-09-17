@@ -40,18 +40,3 @@ def generating_plot(data, x_variable, y_variable, title, size=None):
     plt.show()
     plt.savefig(title + ".png", dpi=300, bbox_inches="tight")
 
-
-if __name__ == "__main__":
-    data_pl = pl.read_csv("pythonproject/src/data/median-income-by-country-2023.csv")
-
-    print(type(data_pl))
-
-    print(type(descriptive_statistics(data_pl)))
-
-    generating_plot(
-        data_pl,
-        x_variable="gdpPerCapitaPPP",
-        y_variable="meanIncome",
-        size="pop2023",
-        title="GDP per Capita vs Avg income (size proportional Population)",
-    )

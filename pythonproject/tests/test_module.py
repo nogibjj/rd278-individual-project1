@@ -2,11 +2,14 @@ import unittest
 import os
 import polars
 import sys
+
+# Import your lib module correctly
+
 #As the module src is not in the test directory I'll append it
 
 dir=os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'src'))
 sys.path.append(dir)
-import source_code  # Import your source_code module correctly
+import lib
 
 
 def is_csv_file(file_path):
@@ -20,7 +23,7 @@ class TestSourceCode(unittest.TestCase):
 
     def test_validity_output(self):
         data = polars.read_csv("pythonproject/src/data/median-income-by-country-2023.csv")
-        result = type(source_code.descriptive_statistics(data))
+        result = type(lib.descriptive_statistics(data))
         self.assertEqual(result, polars.dataframe.frame.DataFrame, msg='This is not the expected output')
 
     def test_csv_validity(self):
