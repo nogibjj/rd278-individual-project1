@@ -21,7 +21,7 @@ jobs:
     - name: Format code
       run: |
         make format
-    - name: Test with unittest
+    - name: Test with unittest and nbval
       run: |
         make test
   
