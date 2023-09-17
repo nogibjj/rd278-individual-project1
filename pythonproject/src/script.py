@@ -1,3 +1,7 @@
+"""
+This script is a test case of the module lib
+"""
+
 from lib import descriptive_statistics, generating_plot
 
 
