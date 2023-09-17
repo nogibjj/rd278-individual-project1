@@ -29,9 +29,9 @@ def test_float_int(vector):
         bool: True if the majority of values are integers or floats, False otherwise.
     """
     # Allowance of 90%
-    THRESHOLD = 0.9
+    threshold = 0.9
 
-    allowance = sum(vector.apply(is_int_or_float)) / len(vector) >= THRESHOLD
+    allowance = sum(vector.apply(is_int_or_float)) / len(vector) >= threshold
 
     return allowance
 
@@ -79,8 +79,7 @@ def descriptive_statistics(directory_path):
         results.write_csv('results.csv')
 
         return data, results
-    else:
-        raise NotADirectoryError("This is not a valid .csv file")
+    raise NotADirectoryError("This is not a valid .csv file")
 
 def generating_plot(data, x_variable, y_variable, title, size=None):
     """
