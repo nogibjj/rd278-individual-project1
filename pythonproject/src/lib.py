@@ -2,7 +2,6 @@
 This module takes a csv and returns statistics about it
 """
 import matplotlib.pyplot as plt
-import polars as pl
 
 
 def descriptive_statistics(data):
@@ -39,4 +38,3 @@ def generating_plot(data, x_variable, y_variable, title, size=None):
     plt.title(title)
     plt.show()
     plt.savefig(title + ".png", dpi=300, bbox_inches="tight")
-
