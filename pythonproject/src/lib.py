@@ -70,7 +70,8 @@ def descriptive_statistics(directory_path):
         directory_path (str): The path to the input CSV file.
 
     Returns:
-        Tuple[pl.DataFrame, pl.DataFrame]: A tuple containing the input Polars DataFrame and the statistics DataFrame.
+        Tuple[pl.DataFrame, pl.DataFrame]: A tuple containing 
+        the input Polars DataFrame and the statistics DataFrame.
     """
     if is_csv_file(directory_path):
         data = pl.read_csv(directory_path)
@@ -107,13 +108,13 @@ def generating_plot(data, x_variable, y_variable, title, size=None):
         plt.xlabel(x_variable)
         plt.ylabel(y_variable)
         plt.title(title)
-        plt.savefig(title + ".png", dpi=300, bbox_inches="tight")
+        
+        # Save the plot to a PNG file
+        filename = title + ".png"
+        plt.savefig(filename, dpi=300, bbox_inches="tight")
+        
         plt.show()
     else:
         raise ValueError(
             f"One or more of {x_variable}, {y_variable}, or {size} is not a float or int"
         )
-
-# Usage:
-# descriptive_statistics("data.csv")
-# generating_plot(data, "X_variable", "Y_variable", "My Plot", "Size_variable")
