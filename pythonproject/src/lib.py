@@ -91,7 +91,8 @@ def generating_plot(data, x_variable, y_variable, title, size=None):
         title (str): The title of the plot.
         size (str, optional): A variable for marker size. Default is None.
     """
-    if test_float_int(data[x_variable]) and test_float_int(data[y_variable]) and (size is None or test_float_int(data[size])):
+    lc_size=(size is None) or (test_float_int(data[size]))
+    if test_float_int(data[x_variable]) and test_float_int(data[y_variable]) and lc_size:
         if size is None:
             area = 1
         else:
