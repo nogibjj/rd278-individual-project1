@@ -17,6 +17,9 @@ The project structure must include the following files:
 - [x] Pinned requirements.txt
 - [x] GitHub Actions performs all four Makefile commands with badges for each one in the README.md
 
+# Explanation Video
+Go to this [link](https://youtu.be/HGFQcOFmSUI).
+
 
 # Descriptive Statistics 
 
